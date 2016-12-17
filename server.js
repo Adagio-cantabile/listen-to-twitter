@@ -7,13 +7,14 @@ var twitter = require('ntwitter');
 var streamHandler = require('./stream_handler')
 var config = require('./config')
 
+app.use(express.static(__dirname + '/public'));
 
 io.on('connection', function(client) {
   console.log("Client connected");
 });
 
 var twit = new twitter(config.twitter);
-twit.stream('statuses/filter',{ track: 'Trump, #Trump'}, function(stream){
+twit.stream('statuses/filter',{ track: 'node, #node'}, function(stream){
   streamHandler(stream, io);
 });
 

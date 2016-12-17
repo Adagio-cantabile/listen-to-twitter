@@ -7,19 +7,14 @@ var twitter = require('ntwitter');
 var streamHandler = require('./stream_handler')
 var config = require('./config')
 
-var twit = new twitter(config.twitter);
-twit.stream('statuses/filter',{ track: 'Trump, #Trump'}, function(stream){
-  streamHandler(stream,io);
-});
 
 io.on('connection', function(client) {
   console.log("Client connected");
 });
 
-io.on('tweet', function(tweet) {
-  console.log('new tweet comes in');
-  response.locales = {tweet: tweet};
-  response.render('index.ejs');
+var twit = new twitter(config.twitter);
+twit.stream('statuses/filter',{ track: 'Trump, #Trump'}, function(stream){
+  streamHandler(stream, io);
 });
 
 app.get('/', function(request, response) {
@@ -27,4 +22,3 @@ app.get('/', function(request, response) {
 });
 
 server.listen(8080);
-

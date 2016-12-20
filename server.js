@@ -14,7 +14,7 @@ io.on('connection', function(client) {
 });
 
 var twit = new twitter(config.twitter);
-twit.stream('statuses/filter',{ track: 'node, #node'}, function(stream){
+twit.stream('statuses/filter',{ track: 'Javascript, #Javascript'}, function(stream){
   streamHandler(stream, io);
 });
 
